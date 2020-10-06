@@ -17,6 +17,9 @@ Box = require "game.test_objects.box"
 
 MusicPlayer = require "engine.music_player" (MusicData)
 
+SoundData = require "game.sound_data"
+SoundManager = require "engine.sound_manager" (SoundData)
+
 states = {
     game = require "game.states.game"
 }
