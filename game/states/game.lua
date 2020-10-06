@@ -41,6 +41,9 @@ function game:keypressed(key)
     if key == "y" then
         MusicPlayer:play("level2", "out-in")
     end
+    if key == "g" then
+        SoundManager:play("smallExplosion")
+    end
 end
 
 function game:draw()

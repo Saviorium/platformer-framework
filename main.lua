@@ -11,6 +11,9 @@ AssetManager = require "engine.asset_manager"
 MusicData = require "game.music_data"
 MusicPlayer = require "engine.music_player" (MusicData)
 
+SoundData = require "game.sound_data"
+SoundManager = require "engine.sound_manager" (SoundData)
+
 states = {
     game = require "game.states.game"
 }
