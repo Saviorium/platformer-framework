@@ -8,10 +8,8 @@ StateManager = require "lib.hump.gamestate"
 
 AssetManager = require "engine.asset_manager"
 
-MusicPlayer = require "engine.music_player"
 MusicData = require "game.music_data"
-
-MusicPlayer:loadData(MusicData)
+MusicPlayer = require "engine.music_player" (MusicData)
 
 states = {
     game = require "game.states.game"
