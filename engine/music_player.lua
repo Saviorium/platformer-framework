@@ -35,6 +35,7 @@ function MusicPlayer:loadData(musicData)
     if MusicPlayer.rhythmModule then
         MusicPlayer.rhythmModule:initMusicData(self.currentTrack)
     end
+    return self
 end
 
 function MusicPlayer:play(track, fading)
@@ -133,4 +134,4 @@ function MusicPlayer:_playCurrentSource()
     self.currentTrack.source:play()
 end
 
-return MusicPlayer
+return function(musicData) return MusicPlayer:loadData(musicData) end
