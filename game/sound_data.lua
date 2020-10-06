@@ -5,7 +5,7 @@ return {
             { name = "explosion2", volume = 1 },
         },
         options = {
-            maxSources = 10,
+            maxSources = 2,
             volume = 1,
             volumeVariation = 0.1,
             pitchVariation = 0.3,
