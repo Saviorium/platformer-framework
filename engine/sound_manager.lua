@@ -9,6 +9,7 @@ local SoundEmitter
 
 local SoundManager = {
     soundConfig = nil,
+    globalVolume = 1,
     listenerPostion = Vector(0, 0),
     listenerVelocity = Vector(0, 0),
     emitters = {},
@@ -76,13 +77,19 @@ function SoundEmitter:play(options)
     for id, sourceSet in ipairs(self.sources) do
         local source = self:getPlaying(sourceSet)
         if not source then
-            local soundFile = self.soundFiles[math.random(#self.soundFiles)].name
-            if not sourceSet[soundFile] then
-                sourceSet[soundFile] = AssetManager:getSound(soundFile) -- TODO: options
+            local soundFile = self.soundFiles[math.random(#self.soundFiles)]
+            local soundFileName = soundFile.name
+            if not sourceSet[soundFileName] then
+                sourceSet[soundFileName] = AssetManager:getSound(soundFileName) -- TODO: options
             end
-            sourceSet[soundFile]:play()
+            sourceSet[soundFileName]:setVolume(self:getVolume(soundFile))
+            sourceSet[soundFileName]:play()
         end
     end
+end
+
+function SoundEmitter:getVolume(soundFile)
+    return math.min(1, SoundManager.globalVolume * self.options.volume * soundFile.volume)
 end
 
 function SoundEmitter:getPlaying(sourceSet)
