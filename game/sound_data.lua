@@ -8,7 +8,7 @@ return {
             maxSources = 2,
             volume = .5,
             volumeVariation = 0.1,
-            pitchVariation = 0.3,
+            pitchVariation = 0.7,
         }
     }
 }
