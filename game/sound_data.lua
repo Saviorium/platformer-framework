@@ -10,5 +10,10 @@ return {
             volumeVariation = 0.1,
             pitchVariation = 0.7,
         }
+    },
+    simpleExplosion = {
+        files = {
+            { name = "explosion1" }
+        }
     }
 }
