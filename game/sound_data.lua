@@ -1,12 +1,12 @@
 return {
     smallExplosion = {
         files = {
-            { name = "explosion1", volume = 1 },
-            { name = "explosion2", volume = 1 },
+            { name = "explosion1", volume = .2 },
+            { name = "explosion2", volume = .6 },
         },
         options = {
             maxSources = 2,
-            volume = 1,
+            volume = .5,
             volumeVariation = 0.1,
             pitchVariation = 0.3,
         }
