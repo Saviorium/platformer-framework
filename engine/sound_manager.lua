@@ -53,13 +53,20 @@ end
 SoundEmitter = Class{
     init = function(self, soundData)
         self.soundFiles = soundData.files
+        for k, soundFile in pairs(self.soundFiles) do
+            if not soundFile.volume then
+                soundFile.volume = 1
+            end
+        end
 
         self.options = {}
         for k, v in pairs(SoundManager.options.defaultEmitterOptions) do
             self.options[k] = v
         end
-        self:setOptions(soundData.options)
-        
+        if soundData.options then
+            self:setOptions(soundData.options)
+        end
+
         self.sources = {}
     end
 }
