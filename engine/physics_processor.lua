@@ -112,7 +112,7 @@ function PhysicsProcessor:calculateCollisions()
                     if object.registerAction then
                         object.registerAction(object, collidedObject, delta)
                     end
-                end=
+                end
             end
         end
     end
