@@ -4,7 +4,7 @@ Vector = require "lib.hump.vector"
 Bullet = Class { -- TODO: I am temporary - delete me
     init = function(self, x, y, dx, dy, size, color)
         self.position = Vector(x, y)
-        self.speed = Vector(dx, dy)
+        self.velocity = Vector(dx, dy)
         self.size = size
         self.color = color
     end

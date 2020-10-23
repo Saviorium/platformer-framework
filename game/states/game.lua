@@ -27,14 +27,14 @@ function game:enter()
 
     self.bullets = {}
 
-    self.PhysicsProcessor = PhysicsProocessorImpl(self.hc)
+    self.PhysicsProcessor = standartPhysicsProcessor
     self.objects = {}
     local start_x, start_y = 100, 100
     local step = 100
-    table.insert(self.objects, Box(start_x, start_y, 100, 10, self.hc, self.PhysicsProcessor))
-    table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.hc, self.PhysicsProcessor))
-    table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.hc, self.PhysicsProcessor))
-    table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.hc, self.PhysicsProcessor))
+    table.insert(self.objects, Box(start_x, start_y, 100, 10, self.PhysicsProcessor))
+    table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
+    table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
+    table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
 end
 
 function game:mousepressed(x, y)
@@ -74,7 +74,7 @@ function game:draw()
     end
 
     love.graphics.setColor(0, 0, 1)
-    local shapes = self.hc:hash():shapes()
+    local shapes = self.PhysicsProcessor.HC:hash():shapes()
     for _, shape in pairs(shapes) do
         shape:draw()
     end
