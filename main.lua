@@ -1,5 +1,6 @@
 require "conf"
 require "engine.utils"
+Vector = require "lib.hump.vector"
 
 Debug = require "engine.debug"
 serpent = require "lib.debug.serpent"
@@ -11,12 +12,12 @@ AssetManager = require "engine.asset_manager"
 MusicData = require "game.music_data"
 MusicPlayer = require "engine.music_player" (MusicData)
 
-
 SoundData = require "game.sound_data"
 SoundManager = require "engine.sound_manager" (SoundData)
 
-PhysicsProocessor = require "engine.physics_processor"
-PhysicsProocessorImpl = require "game.test_objects.physics_processor_impl"
+-- StandartMovingProcessor = require "engine.physics.moving_processor"
+standartPhysicsProcessorParams = require "game.test_objects.standart_physics_parameters"
+standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsProcessorParams)
 
 Player = require "game.test_objects.player"
 Box = require "game.test_objects.box"

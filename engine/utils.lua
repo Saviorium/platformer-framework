@@ -20,5 +20,5 @@ function getIndex(table, object, column)
 end
 
 function isIn(table, object, column)
-    return getIndex(table, object) ~= -1
+    return getIndex(table, object, column) ~= -1
 end

@@ -4,8 +4,8 @@ PhysicsObject = require "engine.physics.physics_object"
 
 Box =
 Class {
-    init = function(self, x, y, width, height, hc, PhysicsProcessor)     
-        self.collider = hc:rectangle(x, y, width, height)
+    init = function(self, x, y, width, height, PhysicsProcessor)     
+        self.collider = PhysicsProcessor.HC:rectangle(x, y, width, height)
         PhysicsProcessor:registerObject( self, x, y, 'terrain', 'SolidBody')
     end
 }

@@ -4,8 +4,8 @@ PhysicsObject = require "engine.physics.physics_object"
 
 Player =
 Class {
-    init = function(self, x, y, hc, PhysicsProcessor)     
-        self.collider = hc:rectangle(x, y, 35, 25)
+    init = function(self, x, y, PhysicsProcessor)     
+        self.collider = PhysicsProcessor.HC:rectangle(x, y, 35, 25)
         PhysicsProcessor:registerObject( self, x, y, 'player', 'RigidBody')
     end
 }
@@ -19,12 +19,6 @@ function Player:draw()
 end
 
 function Player:drawDebug()
-    -- local x = self.position.x
-    -- local y = self.position.y
-    -- local width, height = love.graphics.getWidth() / 2, love.graphics.getHeight() / 2
-
-    -- love.graphics.setColor(0, 255, 0)
-    -- love.graphics.line(x, y, x + self.speed.x * 10, y + self.speed.y * 10)
 
     love.graphics.setColor(255, 0, 0)
     if self.deltaVector then
