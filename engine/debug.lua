@@ -1,6 +1,7 @@
 Debug = {
     LogLevel = 3,
-    ShowFps = 0
+    ShowFps = 0,
+    PrintAnimationEvents = 1
 }
 
 -- usage: vardump(x1, test, myVar) or vardump({ship = self, dt = dt})

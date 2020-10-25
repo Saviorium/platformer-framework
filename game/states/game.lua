@@ -1,4 +1,5 @@
-local Bullet = require("game.bullet")
+local Bullet = require "game.bullet"
+local AnimatedDummy = require "game.animated_dummy"
 
 local game = {}
 
@@ -18,6 +19,8 @@ function game:enter()
     self.soundA:setVolume(0.1)
     self.soundB = AssetManager:getSound("jump")
     self.soundB:setVolume(0.9)
+
+    self.animatedDummy = AnimatedDummy(150, 100)
 
     self.bullets = {}
 end
@@ -49,6 +52,7 @@ end
 function game:draw()
     love.graphics.draw(self.bg)
     self.sprite:draw(10, 10)
+    self.animatedDummy:draw()
 
     for _, bullet in ipairs(self.bullets) do
         bullet:draw()
@@ -56,9 +60,13 @@ function game:draw()
 end
 
 function game:update(dt)
+    if love.keyboard.isDown("right") then
+        self.animatedDummy:move()
+    end
     for _, bullet in ipairs(self.bullets) do
         bullet:update(dt)
     end
+    self.animatedDummy:update(dt)
     love.graphics.setColor({1,1,1})
     self.sprite:update(dt)
 end
