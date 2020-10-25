@@ -1,5 +1,6 @@
 local Class = require "lib.hump.class"
 local Peachy = require "lib.peachy.peachy"
+local AnimationState = require "engine.animation_state"
 
 local Animator = Class {
     init = function(self, animation)
@@ -20,6 +21,28 @@ end
 
 function Animator:addState(state)
     self.states[state.name] = state
+end
+
+function Animator:createSimpleTagState(stateName, tagName)
+    return AnimationState(
+        stateName,
+        self,
+        nil,
+        function(self) self.animator:play(tagName) end,
+        nil 
+    )
+end
+
+function Animator:addInstantTransition(from, to)
+    self:addTransition(from, to, function() return true end)
+end
+
+function Animator:addTransitionOnAnimationEnd(from, to, condition)
+    if not condition then
+        self:addTransition(from, to, self.isLooped)
+    else
+        self:addTransition(from, to, function() return condition and self:isLooped() end)
+    end
 end
 
 -- from - string or { string, string, ... }
