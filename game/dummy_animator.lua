@@ -1,7 +1,18 @@
 local Class = require "lib.hump.class"
 local Animator = require "engine.animator"
 local AnimationState = require "engine.animation_state"
-local AnimationStates = require "game.dummy_animation_states"
+
+local AnimationStates = {
+    running = function(animator)
+        return animator:createSimpleTagState("running", "run")
+    end,
+    stopping = function(animator)
+        return animator:createSimpleTagState("stopping", "brake")
+    end,
+    idle = function(animator)
+        return animator:createSimpleTagState("idle", "idle")
+    end,
+}
 
 DummyAnimator = Class {
     __includes = Animator,
@@ -13,8 +24,8 @@ DummyAnimator = Class {
         --vardump(getmetatable(self))
         self:addTransition("idle", "running", self.isRunning)
         self:addTransition("running", "stopping", self.isStopped)
-        self:addTransition("stopping", "idle", function() return self:isStopped() and self:isLooped() end)
-        self:addTransition("_start", "idle", function() return true end)
+        self:addTransitionOnAnimationEnd("stopping", "idle")
+        self:addInstantTransition("_start", "idle")
     end
 }
 
