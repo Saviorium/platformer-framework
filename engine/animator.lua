@@ -24,6 +24,9 @@ function Animator:addState(state)
 end
 
 function Animator:createSimpleTagState(stateName, tagName)
+    if not tagName then
+        tagName = stateName
+    end
     return AnimationState(
         stateName,
         self,
