@@ -23,10 +23,10 @@ function PhysicsProcessor:addType( newType )
     table.insert( self.objectsTypes, newType )
 end
 
-function PhysicsProcessor:registerObjectType( typeName, gravity, maxSpeed, isColliding  )
+function PhysicsProcessor:registerObjectType( typeName, gravity, maxSpeed, isColliding )
     local newType = {   
                         name = typeName,
-                        gravity = gravity and gravity or self.globalGravity
+                        gravity = gravity and gravity or self.globalGravity,
                         maxSpeed = maxSpeed and maxSpeed or 10,
                         isColliding = isColliding and isColliding or true,
                      }
@@ -50,7 +50,7 @@ function PhysicsProcessor:registerLayer( layerName, gravity )
     -- Добавляет в обработчика всех колизий новый слой, с указанной гравитацией и двумя пустыми списками - CollidedLayers, ActionLayers
     local newLayer = {  
                         name = layerName,
-                        gravityEnabled = gravity and gravity or true
+                        gravityEnabled = gravity and gravity or true,
                         collidedLayers = {},
                         actionLayers = {},
                      }
@@ -88,6 +88,7 @@ end
 
 function PhysicsProcessor:calculateCollisions()
 -- Найти объект с линкованными коллайдерами и пройтись по всем разом, рассчитывая с единым дельта вектором для всех
+
     for ind, object in pairs(self.objects) do
         -- Взять все коллизии объекта
         local collisions = self.HC:collisions(object.collider)
@@ -102,8 +103,8 @@ function PhysicsProcessor:calculateCollisions()
             if collidedObject then  
                 -- Если с данным слоем основной объект коллизирует, используем его функцию коллизий или базовую 
                 if isIn(self.layers[object.collider.layer].collidedLayers, collidedObject.collider.layer) and object.isColliding then
-                    if object.regiterCollision then
-                        object.regiterCollision(object, collideObject, delta)
+                    if object.registerCollision then
+                        object.registerCollision(object, collideObject, delta)
                     else
                         object.defaultCollisionReaction(object, delta)
                     end
