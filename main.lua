@@ -21,7 +21,10 @@ standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsPr
 
 Player = require "game.test_objects.player"
 Box = require "game.test_objects.box"
+standartMapParams = require "game.test_objects.standart_map_params"
+Map = require "game.test_objects.map" (standartMapParams)
 
+sti     = require "lib/sti"
 
 
 states = {

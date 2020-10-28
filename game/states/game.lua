@@ -28,13 +28,15 @@ function game:enter()
     self.bullets = {}
 
     self.PhysicsProcessor = standartPhysicsProcessor
+    self.Map = Map
+    self.Map:init('test_level1', self.PhysicsProcessor)
     self.objects = {}
-    local start_x, start_y = 100, 100
-    local step = 100
-    table.insert(self.objects, Box(start_x, start_y, 100, 10, self.PhysicsProcessor))
-    table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
-    table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
-    table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
+    -- local start_x, start_y = 100, 100
+    -- local step = 100
+    -- table.insert(self.objects, Box(start_x, start_y, 100, 10, self.PhysicsProcessor))
+    -- table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
+    -- table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
+    -- table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
 end
 
 function game:mousepressed(x, y)
@@ -59,6 +61,9 @@ function game:keypressed(key)
     if key == "g" then
         SoundManager:play("smallExplosion")
     end
+    if key == "1" and key == "2" or key == "3" or key == "4" then
+        self.Map:init('test_level'..key, self.PhysicsProcessor)
+    end
 end
 
 function game:draw()
@@ -79,6 +84,7 @@ function game:draw()
         shape:draw()
     end
     love.graphics.setColor(1, 1, 1)
+    self.Map:draw()
     
 end
 
@@ -96,6 +102,7 @@ function game:update(dt)
     self.PhysicsProcessor:update(dt)
     love.graphics.setColor({1,1,1})
     self.sprite:update(dt)
+    self.Map:update(dt)
 end
 
 return game
