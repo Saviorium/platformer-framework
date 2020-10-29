@@ -25,7 +25,6 @@ end
 function Map:registerLayer(name, priorityToDraw, objectTypes)
     local newLayer = {   
         priorityToDraw = priority and priority or 5,
-        objectTypes = objectTypes,
     }
     self:addLayer(name, newLayer)
 end
@@ -44,16 +43,11 @@ end
 function Map:init(mapFileName, PhysicsProcessor)
     self.map = sti("data/maps/" .. mapFileName .. ".lua")
     for name, obj in pairs(self.layers) do
-        -- print(name)
         if self.map.layers[name] then
             self.ground[name] = self.map.layers[name]
-            for index, objectTypeName in pairs(obj.objectTypes) do
-                if self.ground[name].objects then
-                    for _, mapObject in pairs(self.ground[name].objects) do  
-                        if mapObject.type == objectTypeName then
-                            self.objectTypes[objectTypeName].registerFunction(mapObject, self, PhysicsProcessor)
-                        end
-                    end
+            if self.ground[name].objects then
+                for _, mapObject in pairs(self.ground[name].objects) do  
+                    self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor)
                 end
             end
             self.ground[name].priorityToDraw = obj.priorityToDraw

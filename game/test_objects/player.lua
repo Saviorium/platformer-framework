@@ -22,7 +22,7 @@ function Player:drawDebug()
 
     love.graphics.setColor(255, 0, 0)
     if self.deltaVector then
-        print(self.position, self.deltaVector )
+        -- print(self.position, self.deltaVector )
         local normDeltaVector = self.deltaVector:normalized()
         love.graphics.line(
             self.position.x,

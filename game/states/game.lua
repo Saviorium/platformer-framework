@@ -68,13 +68,14 @@ end
 
 function game:draw()
     love.graphics.draw(self.bg)
+    self.Map:draw()
     self.sprite:draw(10, 10)
     self.animatedDummy:draw()
 
     for _, bullet in ipairs(self.bullets) do
         bullet:draw()
     end
-    for _, object in ipairs(self.objects) do
+    for _, object in ipairs(self.PhysicsProcessor.objects) do
         object:draw()
     end
 
@@ -84,7 +85,6 @@ function game:draw()
         shape:draw()
     end
     love.graphics.setColor(1, 1, 1)
-    self.Map:draw()
     
 end
 

@@ -2,19 +2,15 @@ local standartMapParams = {
     layers = {
         solid = {  
             priorityToDraw = 1,
-            objectTypes = {'terrain'},
         },
         objects = {  
             priorityToDraw = 2,
-            objectTypes = {'box', 'player'},
         },
         background = {
             priorityToDraw = 4,
-            objectTypes = {},
         },
         front_layer = {
             priorityToDraw = 3,
-            objectTypes = {},
         }
     },
     objectTypes = {
