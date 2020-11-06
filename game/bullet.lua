@@ -8,7 +8,7 @@ local Bullet = Class { -- TODO: I am temporary - delete me
 }
 
 function Bullet:update(dt)
-    self.position = self.position + self.speed * dt
+    self.position = self.position + self.velocity * dt
 end
 
 function Bullet:draw()

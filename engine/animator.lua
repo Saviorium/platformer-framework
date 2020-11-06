@@ -36,6 +36,12 @@ function Animator:createSimpleTagState(stateName, tagName)
     )
 end
 
+function Animator:addSimpleTagState(stateName, tagName)
+    local state = self:createSimpleTagState(stateName, tagName)
+    self:addState(state)
+    return state
+end
+
 function Animator:addInstantTransition(from, to)
     self:addTransition(from, to, function() return true end)
 end

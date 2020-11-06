@@ -19,6 +19,8 @@ SoundManager = require "engine.sound_manager" (SoundData)
 standartPhysicsProcessorParams = require "game.test_objects.standart_physics_parameters"
 standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsProcessorParams)
 
+UserInputManager = require "engine.controls.user_input_manager" (config.keyBindings)
+
 states = {
     game = require "game.states.game"
 }
@@ -33,6 +35,7 @@ function love.draw()
 end
 
 function love.update(dt)
+    UserInputManager:update(dt)
     MusicPlayer:update(dt)
     StateManager.update(dt)
 end

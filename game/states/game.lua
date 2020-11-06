@@ -4,6 +4,8 @@ local Bullet = require "game.bullet"
 local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
 
+local Enemy = require "game.test_objects.enemy"
+
 local game = {}
 
 function game:enter()
@@ -32,11 +34,12 @@ function game:enter()
     self.PhysicsProcessor = standartPhysicsProcessor
     self.objects = {}
     local start_x, start_y = 100, 100
-    local step = 100
+    local step = 50
     table.insert(self.objects, Box(start_x, start_y, 100, 10, self.PhysicsProcessor))
     table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
     table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
     table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
+    table.insert(self.objects, Enemy(start_x+5*step, start_y+1.5*step))
 end
 
 function game:mousepressed(x, y)

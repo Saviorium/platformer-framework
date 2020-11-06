@@ -17,6 +17,7 @@ globals = {
   "AssetManager",
   "MusicPlayer",
   "SoundManager",
+  "UserInputManager"
   "states",
   "config",
   "Debug",
