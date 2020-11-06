@@ -16,9 +16,10 @@ PhysicsObject = Class {
         self.maxGroundNormal = 0.05
         self.minGroundNormal = 0.005
         self.minMove         = 0.01
-        self.defaultCollisionReaction = function(object, delta)
-                                            object.deltaVector = object.deltaVector + delta
-                                        end 
+        self.defaultCollisionReaction = 
+        function(object, delta)
+            object.deltaVector = object.deltaVector + delta
+        end 
     end
     
 }

@@ -22,7 +22,7 @@ standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsPr
 Player = require "game.test_objects.player"
 Box = require "game.test_objects.box"
 
-
+UserInputManager = require "engine.controls.user_input_manager" (config.keyBindings)
 
 states = {
     game = require "game.states.game"
@@ -38,6 +38,7 @@ function love.draw()
 end
 
 function love.update(dt)
+    UserInputManager:update(dt)
     MusicPlayer:update(dt)
     StateManager.update(dt)
 end
