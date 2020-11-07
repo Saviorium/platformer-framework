@@ -21,7 +21,6 @@ DummyAnimator = Class {
         for _, state in pairs(AnimationStates) do
             self:addState(state(self))
         end
-        --vardump(getmetatable(self))
         self:addTransition("idle", "running", self.isRunning)
         self:addTransition("running", "stopping", self.isStopped)
         self:addTransitionOnAnimationEnd("stopping", "idle")

@@ -22,7 +22,7 @@ function UserInputManager:update(dt)
     self:resetInputs(self.inputSnapshot)
     self:readKeyboardInputs(self.inputSnapshot)
     self:readGamepadInputs(self.inputSnapshot)
-    if Debug and Debug.PrintUserInputs then
+    if Debug and Debug.PrintUserInputs == 1 then
         vardump(inputs)
     end
 end
