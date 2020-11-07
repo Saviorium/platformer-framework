@@ -34,7 +34,9 @@ local DefaultPlatformingMovingProcessor = {
             object.velocity.x = object.direction.x * object.maxSpeed
         end
         object.velocity.y = object.velocity.y + acceleration.y
+    end,
 
+    calculateFrinctionForX = function (object)
         -- Блок снижения скорости (гравитация и трение о поверхность воздух, вся фигня)
         local slowDownDirection = object.velocity.x >= 0 and -1 or 1
         if -slowDownDirection * (object.velocity.x + slowDownDirection * object.slowDownSpeed ) > 0 then
@@ -42,11 +44,13 @@ local DefaultPlatformingMovingProcessor = {
         else
             object.velocity.x = 0
         end
+    end,
 
+    calculateFrinctionForY = function (object)
         if not object.isGrounded and object.velocity.y <= object.maxSpeed  then
             object.velocity = object.velocity + object.gravity
         end
-    end
+    end,
 }
 
 local PhysicsProcessor = {
@@ -189,8 +193,9 @@ end
 
 function PhysicsProcessor:update(dt)
     self:calculateCollisions()
-    for ind, object in pairs(self.objects) do 
-        self.movingProcessor.addAccelerationToObjectAndCalculateFriction(object, Vector(0, 0)) 
+    for ind, object in pairs(self.objects) do
+        self.movingProcessor.calculateFrinctionForX(object)
+        self.movingProcessor.calculateFrinctionForY(object)
         self.collisionResolver.resolveCollisionsForObject(object)
         move(object, object.velocity)
         object.deltaVector = Vector( 0, 0)
