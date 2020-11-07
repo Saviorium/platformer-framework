@@ -31,7 +31,7 @@ local DefaultPlatformingMovingProcessor = {
         if (object.velocity.x + acceleration.x) <= object.maxSpeed then
             object.velocity.x = object.velocity.x + acceleration.x
         else
-            object.velocity.x = direction.x * object.maxSpeed
+            object.velocity.x = object.direction.x * object.maxSpeed
         end
         object.velocity.y = object.velocity.y + acceleration.y
 
@@ -146,7 +146,8 @@ function PhysicsProcessor:registerObject(object, x, y, layer, type)
     PhysicsObject.init( object, x, y, 
                         self.objectsTypes[type].gravity, 
                         self.objectsTypes[type].maxSpeed, 
-                        self.objectsTypes[type].isColliding )
+                        self.objectsTypes[type].isColliding,
+                        self )
 end
 
 function PhysicsProcessor:destroyObject(object)

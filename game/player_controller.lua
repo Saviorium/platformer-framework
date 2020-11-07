@@ -39,7 +39,7 @@ function PlayerController:reactToInputs(inputs)
     end
 
     player.direction = Vector(moveDirection.x == 0 and player.direction.x or moveDirection.x, moveDirection.y)
-    player:addSpeedInDirection( Vector(1, 2), moveDirection)
+    player:addVelocity( moveDirection )
 end
 
 return PlayerController
