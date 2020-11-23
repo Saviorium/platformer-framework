@@ -15,14 +15,14 @@ MusicPlayer = require "engine.sound.music_player" (MusicData)
 SoundData = require "game.sound_data"
 SoundManager = require "engine.sound.sound_manager" (SoundData)
 
--- StandartMovingProcessor = require "engine.physics.moving_processor"
-standartPhysicsProcessorParams = require "engine.physics.standart_physics_parameters"
-standartPhysicsProcessor = require "engine.physics.physics_processor" (standartPhysicsProcessorParams)
+-- StandardMovingProcessor = require "engine.physics.moving_processor"
+standardPhysicsProcessorParams = require "engine.physics.standard_physics_parameters"
+standardPhysicsProcessor = require "engine.physics.physics_processor" (standardPhysicsProcessorParams)
 
 Player = require "game.test_objects.player"
 Box = require "game.test_objects.box"
-standartMapParams = require "engine.map.standart_map_params"
-Map = require "engine.map.map" (standartMapParams)
+standardMapParams = require "engine.map.standard_map_params"
+Map = require "engine.map.map" (standardMapParams)
 
 sti     = require "lib/sti"
 

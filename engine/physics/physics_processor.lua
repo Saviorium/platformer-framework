@@ -146,7 +146,6 @@ function PhysicsProcessor:registerObject(object, x, y, layer, type)
                         self.objectsTypes[type].gravity, 
                         self.objectsTypes[type].maxSpeed, 
                         self.objectsTypes[type].isColliding )
-    print(object)
 end
 
 function PhysicsProcessor:destroyObject(object)
@@ -190,7 +189,6 @@ function PhysicsProcessor:update(dt)
     self:calculateCollisions()
     for ind, object in pairs(self.objects) do
         self.movingProcessor.addAccelerationToObjectAndCalculateFriction(object, Vector(0, 0)) 
-        print(object.velocity) 
         self.collisionResolver.resolveCollisionsForObject(object)
         move(object, object.velocity)
         object.deltaVector = Vector( 0, 0)

@@ -27,7 +27,7 @@ function game:enter()
 
     self.bullets = {}
 
-    self.PhysicsProcessor = standartPhysicsProcessor
+    self.PhysicsProcessor = standardPhysicsProcessor
     self.Map = Map
     self.Map:init('test_level1', self.PhysicsProcessor)
     self.objects = {}

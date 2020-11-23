@@ -24,20 +24,20 @@ end
 
 function Map:registerLayer(name, priorityToDraw, objectTypes)
     local newLayer = {   
-        priorityToDraw = priority and priority or 5,
+        priorityToDraw = priorityToDraw and priorityToDraw or 5,
     }
     self:addLayer(name, newLayer)
 end
 
-function Map:addType(typeName, newType)
-    self.objectTypes[typeName] = newType 
+function Map:addObjectType(objectTypeName, newObjectType)
+    self.objectTypes[objectTypeName] = newObjectType 
 end
 
 function Map:registerType(name, registerFunction)
     local newType = {   
         registerFunction = registerFunction,
     }
-    self:addType(name, newType)
+    self:addObjectType(name, newType)
 end
 
 function Map:init(mapFileName, PhysicsProcessor)
@@ -53,15 +53,7 @@ function Map:init(mapFileName, PhysicsProcessor)
             self.ground[name].priorityToDraw = obj.priorityToDraw
         end
     end
-    -- sort = function(a, b) 
-    --     print(a.priorityToDraw, b.priorityToDraw) 
-    --     return a.priorityToDraw < b.priorityToDraw 
-    -- end
-    -- table.sort (self.ground , sort )
-
-    -- for name, obj in pairs(self.ground) do
-    --     print(name)
-    -- end
+    -- // TO-DO // -- Функция сортировки(хоть пузырьком, хоть фаст сортом главное сделать сортировку по priorityToDraw)
 end
 
 function Map:update(dt)

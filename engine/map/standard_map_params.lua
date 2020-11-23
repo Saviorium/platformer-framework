@@ -1,4 +1,4 @@
-local standartMapParams = {
+local standardMapParams = {
     layers = {
         solid = {  
             priorityToDraw = 1,
@@ -6,12 +6,12 @@ local standartMapParams = {
         objects = {  
             priorityToDraw = 2,
         },
+        front_layer = {
+            priorityToDraw = 3,
+        },
         background = {
             priorityToDraw = 4,
         },
-        front_layer = {
-            priorityToDraw = 3,
-        }
     },
     objectTypes = {
         box = {   
@@ -29,4 +29,4 @@ local standartMapParams = {
     }
 }
 
-return standartMapParams 
+return standardMapParams 
