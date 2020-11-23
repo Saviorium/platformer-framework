@@ -1,5 +1,5 @@
-local Bullet = require "game.bullet"
-local AnimatedDummy = require "game.animated_dummy"
+local Bullet = require "game.test_objects.bullet"
+local AnimatedDummy = require "game.test_objects.animated_dummy"
 local HC = require "lib.hardoncollider"
 
 local game = {}
