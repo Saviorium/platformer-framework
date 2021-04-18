@@ -6,12 +6,12 @@ local standardMapParams = {
         objects = {  
             priorityToDraw = 2,
         },
-        front_layer = {
-            priorityToDraw = 3,
-        },
         background = {
             priorityToDraw = 4,
         },
+        front_layer = {
+            priorityToDraw = 3,
+        }
     },
     objectTypes = {
         box = {   

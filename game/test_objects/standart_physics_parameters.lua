@@ -1,4 +1,4 @@
-local standardPhysicsProcessorParams = {
+local standartPhysicsProcessorParams = {
     layers = {
         player = {  
             gravityEnabled = true,
@@ -25,4 +25,4 @@ local standardPhysicsProcessorParams = {
     }
 }
 
-return standardPhysicsProcessorParams 
+return standartPhysicsProcessorParams 

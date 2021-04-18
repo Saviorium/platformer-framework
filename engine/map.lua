@@ -24,23 +24,23 @@ end
 
 function Map:registerLayer(name, priorityToDraw, objectTypes)
     local newLayer = {   
-        priorityToDraw = priorityToDraw and priorityToDraw or 5,
+        priorityToDraw = priority and priority or 5,
     }
     self:addLayer(name, newLayer)
 end
 
-function Map:addObjectType(objectTypeName, newObjectType)
-    self.objectTypes[objectTypeName] = newObjectType 
+function Map:addType(typeName, newType)
+    self.objectTypes[typeName] = newType 
 end
 
 function Map:registerType(name, registerFunction)
     local newType = {   
         registerFunction = registerFunction,
     }
-    self:addObjectType(name, newType)
+    self:addType(name, newType)
 end
 
-function Map:init(mapFileName, PhysicsProcessor)
+function Map:load(mapFileName, PhysicsProcessor)
     self.map = sti("data/maps/" .. mapFileName .. ".lua")
     for name, obj in pairs(self.layers) do
         if self.map.layers[name] then
@@ -53,7 +53,6 @@ function Map:init(mapFileName, PhysicsProcessor)
             self.ground[name].priorityToDraw = obj.priorityToDraw
         end
     end
-    -- // TO-DO // -- Функция сортировки(хоть пузырьком, хоть фаст сортом главное сделать сортировку по priorityToDraw)
 end
 
 function Map:update(dt)

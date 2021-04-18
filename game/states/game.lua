@@ -1,5 +1,5 @@
-local Bullet = require "game.test_objects.bullet"
-local AnimatedDummy = require "game.test_objects.animated_dummy"
+local Bullet = require "game.bullet"
+local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
 
 local game = {}
@@ -27,16 +27,10 @@ function game:enter()
 
     self.bullets = {}
 
-    self.PhysicsProcessor = standardPhysicsProcessor
+    self.PhysicsProcessor = standartPhysicsProcessor
     self.Map = Map
-    self.Map:init('test_level1', self.PhysicsProcessor)
+    self.Map:load('test_level1', self.PhysicsProcessor)
     self.objects = {}
-    -- local start_x, start_y = 100, 100
-    -- local step = 100
-    -- table.insert(self.objects, Box(start_x, start_y, 100, 10, self.PhysicsProcessor))
-    -- table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
-    -- table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
-    -- table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
 end
 
 function game:mousepressed(x, y)

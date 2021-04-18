@@ -1,6 +1,6 @@
 local Class = require "lib.hump.class"
 local Peachy = require "lib.peachy.peachy"
-local AnimationState = require "engine.animation.animation_state"
+local AnimationState = require "engine.animation_state"
 
 local Animator = Class {
     init = function(self, animation)

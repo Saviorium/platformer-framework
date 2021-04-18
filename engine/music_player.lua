@@ -10,7 +10,7 @@ local MusicPlayer = {
         source = nil,
         metadata = nil
     },
-    rhythmModule = require("engine.sound.rhythm_module"),
+    rhythmModule = require("engine.rhythm_module"),
     globalMusicVolume = 1,
     fadingVolume = {1},
     fadingTime = 1, -- seconds
