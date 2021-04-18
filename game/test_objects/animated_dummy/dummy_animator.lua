@@ -1,6 +1,6 @@
 local Class = require "lib.hump.class"
-local Animator = require "engine.animator"
-local AnimationState = require "engine.animation_state"
+local Animator = require "engine.animation.animator"
+local AnimationState = require "engine.animation.animation_state"
 
 local AnimationStates = {
     running = function(animator)

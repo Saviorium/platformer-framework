@@ -2,7 +2,7 @@ local Class = require "lib.hump.class"
 local Vector = require "lib.hump.vector"
 local FlyingEntityController = require "game.test_objects.enemy.flying_entity_controller"
 local EnemyAI = require "game.test_objects.enemy.enemy_ai"
-local Animator = require "engine.animator"
+local Animator = require "engine.animation.animator"
 
 local Enemy = Class {
     init = function(self, x, y)
