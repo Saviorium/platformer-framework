@@ -1,5 +1,5 @@
-local Bullet = require "game.bullet"
-local AnimatedDummy = require "game.animated_dummy"
+local Bullet = require "game.test_objects.bullet"
+local AnimatedDummy = require "game.test_objects.animated_dummy"
 local HC = require "lib.hardoncollider"
 
 local game = {}
@@ -17,6 +17,7 @@ function game:enter()
     MusicPlayer:registerRhythmCallback("beat", function() table.insert(self.bullets, Bullet(40 * 4, 50, 0, 200, 2, {1,1,0})) end)
     MusicPlayer:registerRhythmCallback("syncopated", function() table.insert(self.bullets, Bullet(40 * 5, 50, 0, 200, 2, {1,0.2,0})) end)
     MusicPlayer:registerRhythmCallback({3}, function() table.insert(self.bullets, Bullet(40 * 1, 50, 0, 200, 10, {1,0,1})) end)
+
     -- MusicPlayer:play("level1")
     self.soundA = AssetManager:getSound("jump")
     self.soundA:setVolume(0.1)
@@ -35,6 +36,8 @@ function game:enter()
     table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
     table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
     table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
+
+    
 end
 
 function game:mousepressed(x, y)
