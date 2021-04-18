@@ -1,23 +1,24 @@
 require "settings"
-require "engine.utils"
-Class = require "lib.hump.class"
+require "engine.utils.utils"
 Vector = require "lib.hump.vector"
+Class = require "lib.hump.class"
 
-Debug = require "engine.debug"
+Debug = require "engine.utils.debug"
 serpent = require "lib.debug.serpent"
 
 StateManager = require "lib.hump.gamestate"
-AssetManager = require "engine.asset_manager"
+
+AssetManager = require "engine.utils.asset_manager"
 
 local MusicData = require "game.music_data"
-MusicPlayer = require "engine.music_player" (MusicData)
+MusicPlayer = require "engine.sound.music_player" (MusicData)
 
 local SoundData = require "game.sound_data"
-SoundManager = require "engine.sound_manager" (SoundData)
+SoundManager = require "engine.sound.sound_manager" (SoundData)
 
 -- StandartMovingProcessor = require "engine.physics.moving_processor"
-standartPhysicsProcessorParams = require "game.test_objects.standart_physics_parameters"
-standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsProcessorParams)
+standartPhysicsProcessorParams = require "engine.physics.standart_physics_parameters"
+standartPhysicsProcessor = require "engine.physics.physics_processor" (standartPhysicsProcessorParams)
 
 UserInputManager = require "engine.controls.user_input_manager" (config.inputs)
 

@@ -1,6 +1,6 @@
 local Class = require "lib.hump.class"
 local Vector = require "lib.hump.vector"
-local DummyAnimator = require "game.dummy_animator"
+local DummyAnimator = require "game.test_objects.animated_dummy.dummy_animator"
 
 local AnimatedDummy = Class { -- TODO: I am temporary - delete me
     init = function(self, x, y)
