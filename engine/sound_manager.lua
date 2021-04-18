@@ -9,7 +9,7 @@ local SoundEmitter
 
 local SoundManager = {
     soundConfig = nil,
-    globalVolume = 1,
+    globalVolume = 0.5,
     listenerPostion = Vector(0, 0),
     listenerVelocity = Vector(0, 0),
     emitters = {},
@@ -42,10 +42,10 @@ end
 
 -- Usage: SoundManager:linkListener(player.position, player.velocity)
 function SoundManager:linkListener(listenerPosition, listenerVelocity)
-    if type(listenerPostion.x) == number and type(listenerPostion.y) == number then
+    if type(listenerPosition.x) == 'number' and type(listenerPosition.y) == 'number' then
         self.listenerPostion = listenerPosition
     end
-    if type(listenerVelocity.x) == number and type(listenerVelocity.y) == number then
+    if type(listenerVelocity.x) == 'number' and type(listenerVelocity.y) == 'number' then
         self.listenerVelocity = listenerVelocity
     end
 end
@@ -53,7 +53,7 @@ end
 SoundEmitter = Class{
     init = function(self, soundData)
         self.soundFiles = soundData.files
-        for k, soundFile in pairs(self.soundFiles) do
+        for _, soundFile in pairs(self.soundFiles) do
             if not soundFile.volume then
                 soundFile.volume = 1
             end
@@ -77,14 +77,16 @@ function SoundEmitter:setOptions(options)
     end
 end
 
+--options = {
+--    volume = 1,
+--    position = {0, 0, 0}
+--}
 function SoundEmitter:play(options)
     if #self.sources < self.options.maxSources then
         self.sources[#self.sources + 1] = {}
     end
     if not options then
-        options = {
-            volume = 1,
-        }
+        options = {}
     end
     for id, sourceSet in ipairs(self.sources) do
         local source = self:getPlaying(sourceSet)
@@ -95,18 +97,25 @@ function SoundEmitter:play(options)
                 sourceSet[soundFileName] = AssetManager:getSound(soundFileName)
             end
             sourceSet[soundFileName]:setVolume(self:getVolume(soundFile, options.volume))
+            if options.position then
+                sourceSet[soundFileName]:setPosition(unpack(options.position))
+            end
+            -- TODO set effects
             sourceSet[soundFileName]:setPitch(1 + self.options.pitchVariation * (love.math.random() * 2 - 1))
             sourceSet[soundFileName]:play()
+            return
         end
     end
 end
 
 function SoundEmitter:getVolume(soundFile, customVolume)
-    return math.min(1, SoundManager.globalVolume * (self.options.volume * soundFile.volume * customVolume + self.options.volumeVariation * (love.math.random() * 2 - 1)) )
+    if not customVolume then customVolume = 1 end
+    return math.max(0, math.min(1,
+        SoundManager.globalVolume * (self.options.volume * soundFile.volume * customVolume + self.options.volumeVariation * (love.math.random() * 2 - 1)) ))
 end
 
 function SoundEmitter:getPlaying(sourceSet)
-    for k, source in pairs(sourceSet) do
+    for _, source in pairs(sourceSet) do
         if source:isPlaying() then
             return source
         end
