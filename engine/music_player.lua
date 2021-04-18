@@ -26,7 +26,7 @@ local MusicPlayer = {
 
         --  _________  _________
         --  old_track\|new_track
-        "out-instant"             
+        "out-instant"
     }
 }
 
@@ -44,7 +44,7 @@ function MusicPlayer:play(track, fading)
     end
     if fading == "out-in" then
         self.isCurrentlyFading = true
-        Timer.tween(self.fadingTime, self.fadingVolume, {0}, "linear", 
+        Timer.tween(self.fadingTime, self.fadingVolume, {0}, "linear",
             function()
                 self:_switchToTrackIfNotAlreadyPlaying(track)
                 Timer.tween(self.fadingTime, self.fadingVolume, {1}, "linear",
@@ -56,7 +56,7 @@ function MusicPlayer:play(track, fading)
     end
     if fading == "out-instant" then
         self.isCurrentlyFading = true
-        Timer.tween(self.fadingTime, self.fadingVolume, {0}, "linear", 
+        Timer.tween(self.fadingTime, self.fadingVolume, {0}, "linear",
             function()
                 self:_switchToTrackIfNotAlreadyPlaying(track)
                 self.fadingVolume = {1}

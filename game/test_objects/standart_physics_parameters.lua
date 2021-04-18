@@ -1,6 +1,6 @@
 local standartPhysicsProcessorParams = {
     layers = {
-        player = {  
+        player = {
             gravityEnabled = true,
             collidedLayers = {'terrain'},
             actionLayers = {},
@@ -12,12 +12,12 @@ local standartPhysicsProcessorParams = {
         }
     },
     objectsTypes = {
-        SolidBody = {   
+        SolidBody = {
             gravity = Vector(0, 0),
             maxSpeed = 0,
             isColliding = false,
         },
-        RigidBody = {   
+        RigidBody = {
             gravity = Vector(0, 0.05),
             maxSpeed = 10,
             isColliding = true,
@@ -25,4 +25,4 @@ local standartPhysicsProcessorParams = {
     }
 }
 
-return standartPhysicsProcessorParams 
+return standartPhysicsProcessorParams

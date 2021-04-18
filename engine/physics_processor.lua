@@ -2,7 +2,7 @@ local Vector = require "lib.hump.vector"
 local HC = require "lib.hardoncollider"
 local PhysicsObject = require "engine.physics.physics_object"
 
-function move(object, moveVector )
+local function move(object, moveVector )
     object.position = object.position + moveVector
     object.collider:move(moveVector)
 end
@@ -18,10 +18,10 @@ local DefaultPlatformingCollisionResolver = {
                 move(object, Vector(0,object.deltaVector.y/2))
                 object.isGrounded = object.deltaVector.y < -object.minGroundNormal
             end
-            
+
             if math.abs(object.deltaVector.y) < object.minGroundNormal and object.isGrounded then
                 object.isGrounded = false
-            end  
+            end
         end
     }
 
@@ -31,7 +31,7 @@ local DefaultPlatformingMovingProcessor = {
             if (object.velocity.x + acceleration.x) <= object.maxSpeed then
                 object.velocity.x = object.velocity.x + acceleration.x
             else
-                object.velocity.x = direction.x * object.maxSpeed
+                object.velocity.x = direction.x * object.maxSpeed -- fixme: direction is undefined
             end
             object.velocity.y = object.velocity.y + acceleration.y
 
@@ -75,7 +75,7 @@ function PhysicsProcessor:loadParameters(params)
 end
 
 function PhysicsProcessor:addType(typeName, newType)
-    self.objectsTypes[typeName] = newType 
+    self.objectsTypes[typeName] = newType
 end
 
 -- typeName - Naming of type and index in table - string
@@ -83,7 +83,7 @@ end
 -- maxSpeed - Maximum speed of an object, if 0 then object immovable, if null - take default max speed
 -- isColliding - bool = can be pushed by another object?
 function PhysicsProcessor:registerObjectType(typeName, gravity, maxSpeed, isColliding)
-    local newType = {   
+    local newType = {
         gravity = gravity and gravity or self.globalGravity,
         maxSpeed = maxSpeed and maxSpeed or 10,
         isColliding = isColliding and isColliding or true,
@@ -101,13 +101,13 @@ function PhysicsProcessor:getAllLayerNames()
 end
 
 function PhysicsProcessor:addLayer(layerName, newLayer )
-    self.layers[layerName] = newLayer 
+    self.layers[layerName] = newLayer
 end
 
 -- layerName - Naming of layer and index in table - string
 -- gravity  - bool = are objects in the layer affected by gravity?
 function PhysicsProcessor:registerLayer( layerName, gravity )
-    local newLayer = {  
+    local newLayer = {
                         gravityEnabled = gravity and gravity or true,
                         collidedLayers = {},
                         actionLayers = {},
@@ -142,9 +142,9 @@ end
 function PhysicsProcessor:registerObject(object, x, y, layer, type)
     table.insert( self.objects, object )
     object.collider.layer = layer
-    PhysicsObject.init( object, x, y, 
-                        self.objectsTypes[type].gravity, 
-                        self.objectsTypes[type].maxSpeed, 
+    PhysicsObject.init( object, x, y,
+                        self.objectsTypes[type].gravity,
+                        self.objectsTypes[type].maxSpeed,
                         self.objectsTypes[type].isColliding )
 end
 
@@ -174,7 +174,6 @@ function PhysicsProcessor:calculateCollisions()
                     end
                 end
                 if isIn(self.layers[object.collider.layer].actionLayers, collidedObject.collider.layer) then
-                    
                     if object.registerAction then
                         object.registerAction(object, collidedObject, delta)
                     end
@@ -188,7 +187,7 @@ end
 function PhysicsProcessor:update(dt)
     self:calculateCollisions()
     for ind, object in pairs(self.objects) do 
-        self.movingProcessor.addAccelerationToObjectAndCalculateFriction(object, Vector(0, 0)) 
+        self.movingProcessor.addAccelerationToObjectAndCalculateFriction(object, Vector(0, 0))
         self.collisionResolver.resolveCollisionsForObject(object)
         move(object, object.velocity)
         object.deltaVector = Vector( 0, 0)

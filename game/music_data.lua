@@ -1,4 +1,4 @@
-local musicData = {}
+local musicData
 
 musicData = {
     level1 = {

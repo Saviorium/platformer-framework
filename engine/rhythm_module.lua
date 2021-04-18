@@ -50,7 +50,7 @@ local RhythmModule = {
             beat = { 1, 2, 3, 4 },
             syncopated = { 1.5, 2.5, 3.5, 4.5 },
         },
-        [3] = { 
+        [3] = {
             bar = { 1 },
             onBeat = { 1 },
             offBeat = { 2, 3 },
