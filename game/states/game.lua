@@ -1,10 +1,10 @@
-local Player = require "game.test_objects.player"
+local Player = require "game.test_objects.player.player"
 local Box = require "game.test_objects.box"
 local Bullet = require "game.bullet"
 local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
 
-local Enemy = require "game.test_objects.enemy"
+local Enemy = require "game.test_objects.enemy.enemy"
 
 local game = {}
 
@@ -63,6 +63,9 @@ function game:keypressed(key)
     end
     if key == "g" then
         SoundManager:play("smallExplosion")
+    end
+    if key == "c" then
+        self.objects[5]:takeControl(UserInputManager)
     end
 end
 

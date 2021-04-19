@@ -24,4 +24,8 @@ local PhysicsObject = Class {
     end
 }
 
+function PhysicsObject:setVelocity(vector)
+    self.velocity = vector:clone()
+end
+
 return PhysicsObject

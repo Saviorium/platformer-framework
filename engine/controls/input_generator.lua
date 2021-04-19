@@ -3,8 +3,10 @@ local Class = require "lib.hump.class"
 local InputGenerator = Class {
     init = function(self)
         self.inputSnapshot = {
-            -- command  = true
-            -- command2 = 1
+            -- up   = 1
+            -- jump = 1
+            -- move = { x = 0.5, y = -1 }
+            -- etc.
         }
     end
 }
