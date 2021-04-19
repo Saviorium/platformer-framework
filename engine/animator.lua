@@ -32,7 +32,7 @@ function Animator:createSimpleTagState(stateName, tagName)
         self,
         nil,
         function(self) self.animator:play(tagName) end,
-        nil 
+        nil
     )
 end
 
@@ -95,11 +95,11 @@ function Animator:update(dt)
     local transitionTo
     if currentState then
         transitionTo = self:_checkTransitions(self.transitions["*"])
-        transitionTo = self:_checkTransitions(self.transitions[currentState])
+        transitionTo = self:_checkTransitions(self.transitions[currentState]) -- FIXME: this is a bug for sure
     else
         transitionTo = self:_checkTransitions(self.transitions["_start"])
     end
-    if transitionTo then 
+    if transitionTo then
         self:switchToState(transitionTo)
     end
 end

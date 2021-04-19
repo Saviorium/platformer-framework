@@ -1,3 +1,5 @@
+local Player = require "game.test_objects.player"
+local Box = require "game.test_objects.box"
 local Bullet = require "game.bullet"
 local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
@@ -79,7 +81,6 @@ function game:draw()
         shape:draw()
     end
     love.graphics.setColor(1, 1, 1)
-    
 end
 
 function game:update(dt)

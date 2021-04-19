@@ -1,8 +1,8 @@
 local Class = require "lib.hump.class"
 local Vector = require "lib.hump.vector"
 -- Остаётся только для параметров и базового функционала любого физичного объекта, из него не вызываются upadte и draw всякие
-PhysicsObject = Class {
-    init = function(self, x, y, gravity, maxSpeed, isColliding)
+local PhysicsObject = Class {
+    init = function(self, x, y, gravity, maxSpeed, isColliding, PhysicsProcessor)
         self.position    = Vector( x, y )
         self.velocity    = Vector( 0, 0 )
         self.gravity     = gravity
@@ -16,11 +16,12 @@ PhysicsObject = Class {
         self.maxGroundNormal = 0.05
         self.minGroundNormal = 0.005
         self.minMove         = 0.01
-        self.defaultCollisionReaction = function(object, delta)
-                                            object.deltaVector = object.deltaVector + delta
-                                        end 
+        self.defaultCollisionReaction =
+        function(object, delta)
+            object.deltaVector = object.deltaVector + delta
+        end
+        self.addVelocity = PhysicsProcessor.movingProcessor.addAccelerationToObjectAndCalculateFriction
     end
-    
 }
 
 return PhysicsObject

@@ -14,7 +14,7 @@ local AnimationStates = {
     end,
 }
 
-DummyAnimator = Class {
+local DummyAnimator = Class {
     __includes = Animator,
     init = function(self, animationSprite)
         Animator.init(self, animationSprite)

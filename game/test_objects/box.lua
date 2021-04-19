@@ -1,10 +1,8 @@
-Class = require "lib.hump.class"
-Vector = require "lib.hump.vector"
-PhysicsObject = require "engine.physics.physics_object"
+local PhysicsObject = require "engine.physics.physics_object"
 
-Box =
+local Box =
 Class {
-    init = function(self, x, y, width, height, PhysicsProcessor)     
+    init = function(self, x, y, width, height, PhysicsProcessor)
         self.collider = PhysicsProcessor.HC:rectangle(x, y, width, height)
         PhysicsProcessor:registerObject( self, x, y, 'terrain', 'SolidBody')
     end

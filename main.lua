@@ -1,18 +1,18 @@
 require "conf"
 require "engine.utils"
+Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
 
 Debug = require "engine.debug"
 serpent = require "lib.debug.serpent"
 
 StateManager = require "lib.hump.gamestate"
-
 AssetManager = require "engine.asset_manager"
 
-MusicData = require "game.music_data"
+local MusicData = require "game.music_data"
 MusicPlayer = require "engine.music_player" (MusicData)
 
-SoundData = require "game.sound_data"
+local SoundData = require "game.sound_data"
 SoundManager = require "engine.sound_manager" (SoundData)
 
 -- StandardMovingProcessor = require "engine.physics.moving_processor"
@@ -25,7 +25,6 @@ standardMapParams = require "engine.standard_map_params"
 Map = require "engine.map" (standardMapParams)
 
 sti     = require "lib/sti"
-
 
 states = {
     game = require "game.states.game"

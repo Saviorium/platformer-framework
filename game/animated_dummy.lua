@@ -2,7 +2,7 @@ local Class = require "lib.hump.class"
 local Vector = require "lib.hump.vector"
 local DummyAnimator = require "game.dummy_animator"
 
-AnimatedDummy = Class { -- TODO: I am temporary - delete me
+local AnimatedDummy = Class { -- TODO: I am temporary - delete me
     init = function(self, x, y)
         self.position = Vector(x, y)
         self.animator = DummyAnimator(AssetManager:getAnimation("player"))
