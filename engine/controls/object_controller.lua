@@ -1,8 +1,7 @@
 local Class = require "lib.hump.class"
 
 local ObjectController = Class {
-    init = function(self, commandsCallbacks, inputGenerator)
-        self.commandsCallbacks = commandsCallbacks
+    init = function(self, inputGenerator)
         self.inputGenerator = inputGenerator
     end
 }
@@ -13,11 +12,7 @@ function ObjectController:update(dt)
 end
 
 function ObjectController:reactToInputs(inputSnapshot)
-    for command, callback in pairs(self.commandsCallbacks) do
-        if inputSnapshot[command] then
-            callback()
-        end
-    end
+    -- override this
 end
 
 return ObjectController

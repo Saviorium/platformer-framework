@@ -1,4 +1,4 @@
-require "conf"
+require "settings"
 require "engine.utils"
 Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
@@ -19,7 +19,7 @@ SoundManager = require "engine.sound_manager" (SoundData)
 standartPhysicsProcessorParams = require "game.test_objects.standart_physics_parameters"
 standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsProcessorParams)
 
-UserInputManager = require "engine.controls.user_input_manager" (config.keyBindings)
+UserInputManager = require "engine.controls.user_input_manager" (config.inputs)
 
 states = {
     game = require "game.states.game"

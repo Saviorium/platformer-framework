@@ -1,10 +1,10 @@
 local Class = require "lib.hump.class"
 local Vector = require "lib.hump.vector"
-local EnemyAI = require "game.enemy_ai"
-local ObjectController = require "engine.controls.object_controller"
+local FlyingEntityController = require "game.test_objects.enemy.flying_entity_controller"
+local EnemyAI = require "game.test_objects.enemy.enemy_ai"
 local Animator = require "engine.animator"
 
-Enemy = Class {
+local Enemy = Class {
     init = function(self, x, y)
         self.position = Vector(x, y)
 
@@ -12,20 +12,18 @@ Enemy = Class {
         self.animator:addSimpleTagState("flying")
         self.animator:addInstantTransition("_start", "flying")
 
-        self.controller = ObjectController(
-            {
-                up    = function() self:move(-1, 0) end,
-                left  = function() self:move(0, -1) end,
-                right = function() self:move(0, 1) end,
-                down  = function() self:move(1, 0) end
-            }, EnemyAI.getFlyingEnemyAI(self)
-        )
+        self.controller = FlyingEntityController(self, EnemyAI.getFlyingEnemyAI(self))
+
+        self.moveSpeed = 5
     end
 }
 
-function Enemy:move(dx, dy)
-    self.position.x = self.position.x + dx
-    self.position.y = self.position.y + dy
+function Enemy:takeControl(inputGenerator)
+    self.controller.inputGenerator = inputGenerator
+end
+
+function Enemy:move(vector)
+    self.position = self.position + vector * self.moveSpeed
 end
 
 function Enemy:update( dt )

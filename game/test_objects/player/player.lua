@@ -1,17 +1,34 @@
 local PhysicsObject = require "engine.physics.physics_object"
-local PlayerController = require "game.player_controller"
+local PlayerController = require "game.test_objects.player.player_controller"
 
 local Player = Class {
     init = function(self, x, y, PhysicsProcessor)
         self.collider = PhysicsProcessor.HC:rectangle(x, y, 35, 25)
-        PhysicsProcessor:registerObject( self, x, y, 'player', 'RigidBody')
-        self.controller = PlayerController(self)
+        PhysicsProcessor:registerObject(self, x, y, 'player', 'RigidBody')
+        self.controller = PlayerController(self, UserInputManager)
         self.direction = Vector(0,0)
+
+        self.jumpSpeed = 1
+        self.moveSpeed = 1
     end
 }
 
-function Player:update( dt )
+function Player:update(dt)
     self.controller:update(dt)
+end
+
+function Player:move(direction)
+    self:addVelocity(direction * self.moveSpeed)
+end
+
+function Player:jump()
+    self.isGrounded = false
+    local jumpDirection = Vector(0, 1)
+    self:addVelocity(jumpDirection * self.jumpSpeed)
+end
+
+function Player:killJump()
+    self:setVelocity(Vector())
 end
 
 function Player:draw()

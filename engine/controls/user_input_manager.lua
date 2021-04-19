@@ -1,48 +1,31 @@
 local Class = require "lib.hump.class"
+local Baton = require "lib.baton.baton"
 local InputGenerator = require "engine.controls.input_generator"
 
 local UserInputManager = Class {
-    _includes = InputGenerator,
-    init = function(self, keyConfig)
+    __includes = InputGenerator,
+    init = function(self, inputConfig)
         InputGenerator.init(self)
-        self.keyConfig = keyConfig
-        self.inputSnapshot = self:resetInputs({})
+        self.inputConfig = inputConfig
+        self.batonInstance = Baton.new(self.inputConfig)
     end
 }
 
-function UserInputManager:resetInputs(snapshot)
-    -- do that inplace
-    for command, _ in pairs(snapshot) do
-        snapshot[command] = false
-    end
-    return snapshot
-end
-
 function UserInputManager:update(dt)
-    self:resetInputs(self.inputSnapshot)
-    self:readKeyboardInputs(self.inputSnapshot)
-    self:readGamepadInputs(self.inputSnapshot)
-    if Debug and Debug.PrintUserInputs == 1 then
-        vardump(inputs)
-    end
+    self.batonInstance:update()
+    self.inputSnapshot = self:_saveInputSnapshot()
 end
 
-function UserInputManager:readKeyboardInputs(snapshot)
-    for command, keys in pairs(self.keyConfig) do
-        for _, key in ipairs(keys) do
-            snapshot[command] = snapshot[command] or love.keyboard.isDown(key)
-        end
+function UserInputManager:_saveInputSnapshot()
+    local snapshot = {}
+    for command, _ in pairs(self.inputConfig.controls) do
+        snapshot[command] = self.batonInstance:get(command)
+    end
+    for inputPair, _ in pairs(self.inputConfig.pairs) do
+        local x, y = self.batonInstance:get(inputPair)
+        snapshot[inputPair] = { x = x, y = y }
     end
     return snapshot
-end
-
-function UserInputManager:readGamepadInputs(snapshot)
-    -- TODO
-    return snapshot
-end
-
-function UserInputManager:getInputSnapshot()
-    return self.inputSnapshot
 end
 
 return UserInputManager
