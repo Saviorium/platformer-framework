@@ -15,11 +15,10 @@ function PlayerController:reactToInputs(inputs)
 
     local moveDirection = Vector(player.direction.x, player.direction.y)
 
-    if inputs.up and player.isGrounded then
-        player:jump() -- fixme: it's not jumping for now
-    elseif inputs.down then
-        -- move down faster
-    else
+    if inputs.up > 0 and player.isGrounded then
+        player:jump()
+    end
+    if inputs.up == 0 then
         player:killJump()
     end
 

@@ -21,11 +21,8 @@ local PhysicsObject = Class {
             object.deltaVector = object.deltaVector + delta
         end
         self.addVelocity = PhysicsProcessor.movingProcessor.addAccelerationToObjectAndCalculateFriction
+        self.setVelocity = function(self, vector) self.velocity = vector:clone() end
     end
 }
-
-function PhysicsObject:setVelocity(vector)
-    self.velocity = vector:clone()
-end
 
 return PhysicsObject
