@@ -8,7 +8,7 @@ local Player = Class {
         self.controller = PlayerController(self, UserInputManager)
         self.direction = Vector(0,0)
 
-        self.jumpSpeed = 1
+        self.jumpSpeed = 3
         self.moveSpeed = 1
     end
 }
@@ -23,12 +23,12 @@ end
 
 function Player:jump()
     self.isGrounded = false
-    local jumpDirection = Vector(0, 1)
+    local jumpDirection = Vector(0, -1)
     self:addVelocity(jumpDirection * self.jumpSpeed)
 end
 
 function Player:killJump()
-    self:setVelocity(Vector())
+    self:setVelocity(Vector(self.velocity.x, math.max(0, self.velocity.y)))
 end
 
 function Player:draw()
