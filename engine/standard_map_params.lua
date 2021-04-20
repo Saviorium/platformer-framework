@@ -17,13 +17,13 @@ local standardMapParams = {
         box = {   
             registerFunction =
             function(object, Map, PhysicsProcessor)
-                Box(object.x, object.y, object.width, object.height, PhysicsProcessor)
+                return Box(object.x, object.y, object.width, object.height, PhysicsProcessor)
             end 
         },
         player = {   
             registerFunction = 
             function(object, Map, PhysicsProcessor)
-                Player(object.x, object.y, PhysicsProcessor)
+                return Player(object.x, object.y, PhysicsProcessor)
             end
         }
     }

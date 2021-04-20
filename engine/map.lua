@@ -3,6 +3,7 @@ local Map = {
     layers = {},
     objectTypes = {},
     ground = {},
+    objects = {}
 }
 
 function Map:loadParameters(params)
@@ -47,7 +48,7 @@ function Map:load(mapFileName, PhysicsProcessor)
             self.ground[name] = self.map.layers[name]
             if self.ground[name].objects then
                 for _, mapObject in pairs(self.ground[name].objects) do  
-                    self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor)
+                    table.insert(self.objects, self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor))
                 end
             end
             self.ground[name].priorityToDraw = obj.priorityToDraw
@@ -57,6 +58,9 @@ end
 
 function Map:update(dt)
     self.map:update(dt)
+    for _, obj in pairs(self.objects) do
+        obj:update(dt)
+    end
 end
 
 function Map:draw()
