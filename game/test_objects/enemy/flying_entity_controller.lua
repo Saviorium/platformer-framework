@@ -11,7 +11,7 @@ local FlyingEntityController = Class {
 }
 
 function FlyingEntityController:reactToInputs(inputs)
-    self.entity:move(Vector(inputs.move.x, inputs.move.y))
+    self.entity:move(inputs.move)
 end
 
 return FlyingEntityController

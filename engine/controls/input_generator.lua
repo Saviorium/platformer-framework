@@ -5,7 +5,7 @@ local InputGenerator = Class {
         self.inputSnapshot = {
             -- up   = 1
             -- jump = 1
-            -- move = { x = 0.5, y = -1 }
+            -- move = Vector(0.5, -1)
             -- etc.
         }
     end
