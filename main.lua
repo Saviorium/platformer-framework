@@ -21,13 +21,6 @@ standartPhysicsProcessorParams = require "game.test_objects.standart_physics_par
 standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsProcessorParams)
 
 UserInputManager = require "engine.controls.user_input_manager" (config.inputs)
-Player = require "game.test_objects.player.player"
-Box = require "game.test_objects.box"
-standardMapParams = require "engine.standard_map_params"
-Map = require "engine.map" (standardMapParams)
-
-sti     = require "lib/sti"
-
 
 states = {
     game = require "game.states.game"

@@ -2,6 +2,9 @@ local Bullet = require "game.bullet"
 local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
 
+local mapParams = require "game.map_params"
+local Map = require "engine.map" (mapParams)
+
 local game = {}
 
 function game:enter()
@@ -28,8 +31,8 @@ function game:enter()
     self.bullets = {}
 
     self.PhysicsProcessor = standartPhysicsProcessor
-    self.Map = Map
-    self.Map:load('test_level1', self.PhysicsProcessor)
+    self.map = Map
+    self.map:load('test_level1', self.PhysicsProcessor)
     self.objects = {}
 end
 
@@ -56,16 +59,16 @@ function game:keypressed(key)
         SoundManager:play("smallExplosion")
     end
     if key == "c" then
-        self.objects[5]:takeControl(UserInputManager)
+        self.map:getObject("test_enemy_1"):takeControl(UserInputManager)
     end
     if key == "1" and key == "2" or key == "3" or key == "4" then
-        self.Map:init('test_level'..key, self.PhysicsProcessor)
+        self.map:init('test_level'..key, self.PhysicsProcessor)
     end
 end
 
 function game:draw()
     love.graphics.draw(self.bg)
-    self.Map:draw()
+    self.map:draw()
     self.sprite:draw(10, 10)
     self.animatedDummy:draw()
 
@@ -99,7 +102,7 @@ function game:update(dt)
     self.PhysicsProcessor:update(dt)
     love.graphics.setColor({1,1,1})
     self.sprite:update(dt)
-    self.Map:update(dt)
+    self.map:update(dt)
 end
 
 return game

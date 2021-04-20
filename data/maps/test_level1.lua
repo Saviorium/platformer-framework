@@ -1,7 +1,7 @@
 return {
-  version = "1.4",
+  version = "1.5",
   luaversion = "5.1",
-  tiledversion = "1.4.2",
+  tiledversion = "1.5.0",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 256,
@@ -9,13 +9,12 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 4,
-  nextobjectid = 3,
+  nextobjectid = 4,
   properties = {},
   tilesets = {
     {
       name = "base-tileset",
       firstgid = 1,
-      filename = "../graphics/base-tileset.tsx",
       tilewidth = 16,
       tileheight = 16,
       spacing = 0,
@@ -35,7 +34,7 @@ return {
         height = 16
       },
       properties = {},
-      terrains = {},
+      wangsets = {},
       tilecount = 27,
       tiles = {}
     }
@@ -53,6 +52,8 @@ return {
       opacity = 1,
       offsetx = 0,
       offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
       properties = {},
       encoding = "lua",
       data = {
@@ -326,6 +327,8 @@ return {
       opacity = 1,
       offsetx = 0,
       offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
       properties = {},
       encoding = "lua",
       data = {
@@ -596,6 +599,8 @@ return {
       opacity = 1,
       offsetx = 0,
       offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
       properties = {},
       objects = {
         {
@@ -618,6 +623,19 @@ return {
           shape = "point",
           x = 48,
           y = 50,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 3,
+          name = "test_enemy_1",
+          type = "enemy",
+          shape = "point",
+          x = 243,
+          y = 97,
           width = 0,
           height = 0,
           rotation = 0,

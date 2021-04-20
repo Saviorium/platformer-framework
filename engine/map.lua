@@ -1,3 +1,5 @@
+local sti = require "lib/sti"
+
 local Map = {
     map = nil,
     layers = {},
@@ -17,6 +19,10 @@ function Map:loadParameters(params)
         self.PhysicsProcessor = params.PhysicsProcessor
     end
     return self
+end
+
+function Map:getObject(name)
+    return self.objects[name]
 end
 
 function Map:addLayer(layerName, newLayer)
@@ -47,8 +53,15 @@ function Map:load(mapFileName, PhysicsProcessor)
         if self.map.layers[name] then
             self.ground[name] = self.map.layers[name]
             if self.ground[name].objects then
-                for _, mapObject in pairs(self.ground[name].objects) do  
-                    table.insert(self.objects, self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor))
+                for _, mapObject in pairs(self.ground[name].objects) do
+                    if mapObject.name ~= nil and mapObject.name ~= '' then
+                        if self.objects[mapObject.name] then
+                            error("Error loading map: conficting object name") -- todo: register as new name?
+                        end
+                        self.objects[mapObject.name] = self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor)
+                    else
+                        table.insert(self.objects, self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor))
+                    end
                 end
             end
             self.ground[name].priorityToDraw = obj.priorityToDraw
@@ -66,6 +79,9 @@ end
 function Map:draw()
     for ind, layer in pairs(self.ground) do
         self.map:drawLayer(layer)
+    end
+    for _, obj in pairs(self.objects) do
+        obj:draw()
     end
 end
 

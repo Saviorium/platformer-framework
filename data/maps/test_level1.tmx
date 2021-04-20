@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="3">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="4">
  <editorsettings>
   <export target="test_level1.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" source="../graphics/base-tileset.tsx"/>
+ <tileset firstgid="1" name="base-tileset" tilewidth="16" tileheight="16" tilecount="27" columns="9">
+  <image source="../graphics/base-tileset.png" width="144" height="48"/>
+ </tileset>
  <layer id="1" name="background" width="256" height="256">
   <data encoding="csv">
 0,0,0,11,11,11,11,11,0,0,11,11,11,0,0,0,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
@@ -527,6 +529,9 @@
  <objectgroup id="3" name="objects">
   <object id="1" type="box" x="17" y="79" width="64" height="19"/>
   <object id="2" type="player" x="48" y="50">
+   <point/>
+  </object>
+  <object id="3" name="test_enemy_1" type="enemy" x="243" y="97">
    <point/>
   </object>
  </objectgroup>
