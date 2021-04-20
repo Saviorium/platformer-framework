@@ -17,7 +17,7 @@ function RandomInputGenerator:getInputSnapshot()
         left = rndValue == 3 and 1 or 0,
         right = rndValue == 4 and 1 or 0,
     }
-    inputs.move = { x = inputs.right - inputs.left, y = inputs.up - inputs.down }
+    inputs.move = Vector(inputs.right - inputs.left, inputs.up - inputs.down)
     return inputs
 end
 

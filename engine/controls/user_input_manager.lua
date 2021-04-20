@@ -1,4 +1,5 @@
 local Class = require "lib.hump.class"
+local Vector = require "lib.hump.vector"
 local Baton = require "lib.baton.baton"
 local InputGenerator = require "engine.controls.input_generator"
 
@@ -23,7 +24,7 @@ function UserInputManager:_saveInputSnapshot()
     end
     for inputPair, _ in pairs(self.inputConfig.pairs) do
         local x, y = self.batonInstance:get(inputPair)
-        snapshot[inputPair] = { x = x, y = y }
+        snapshot[inputPair] = Vector(x, y)
     end
     return snapshot
 end
