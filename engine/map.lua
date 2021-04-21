@@ -1,11 +1,17 @@
 local sti = require "lib/sti"
 
-local Map = {
-    map = nil,
-    layers = {},
-    objectTypes = {},
-    ground = {},
-    objects = {}
+local Map = Class {
+    init = function(self, params, mapFileName, arx)
+
+        self.map = nil
+        self.layers = {}
+        self.objectTypes = {}
+        self.ground = {}
+        self.objects = {}
+
+        self:loadParameters(params)
+        self:load(mapFileName, arx)
+    end
 }
 
 function Map:loadParameters(params)
@@ -47,7 +53,7 @@ function Map:registerType(name, registerFunction)
     self:addType(name, newType)
 end
 
-function Map:load(mapFileName, PhysicsProcessor)
+function Map:load(mapFileName, arx)
     self.map = sti("data/maps/" .. mapFileName .. ".lua")
     for name, obj in pairs(self.layers) do
         if self.map.layers[name] then
@@ -58,9 +64,9 @@ function Map:load(mapFileName, PhysicsProcessor)
                         if self.objects[mapObject.name] then
                             error("Error loading map: conficting object name") -- todo: register as new name?
                         end
-                        self.objects[mapObject.name] = self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor)
+                        self.objects[mapObject.name] = self.objectTypes[mapObject.type].registerFunction(mapObject, self, arx)
                     else
-                        table.insert(self.objects, self.objectTypes[mapObject.type].registerFunction(mapObject, self, PhysicsProcessor))
+                        table.insert(self.objects, self.objectTypes[mapObject.type].registerFunction(mapObject, self, arx))
                     end
                 end
             end
@@ -85,4 +91,4 @@ function Map:draw()
     end
 end
 
-return function(params) return Map:loadParameters(params) end
+return Map

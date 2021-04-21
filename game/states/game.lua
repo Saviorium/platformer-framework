@@ -3,7 +3,7 @@ local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
 
 local mapParams = require "game.map_params"
-local Map = require "engine.map" (mapParams)
+local Map = require "engine.map"
 
 local game = {}
 
@@ -31,9 +31,7 @@ function game:enter()
     self.bullets = {}
 
     self.PhysicsProcessor = standartPhysicsProcessor
-    self.map = Map
-    self.map:load('test_level1', self.PhysicsProcessor)
-    self.objects = {}
+    self.map = Map(mapParams, 'test_level1', {PhysicsProcessor = self.PhysicsProcessor})
 end
 
 function game:mousepressed(x, y)
@@ -96,9 +94,6 @@ function game:update(dt)
         bullet:update(dt)
     end
     self.animatedDummy:update(dt)
-    for _, object in ipairs(self.objects) do
-        object:update(dt)
-    end
     self.PhysicsProcessor:update(dt)
     love.graphics.setColor({1,1,1})
     self.sprite:update(dt)

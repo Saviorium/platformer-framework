@@ -20,19 +20,19 @@ local mapParams = {
     objectTypes = {
         box = {
             registerFunction =
-            function(object, Map, PhysicsProcessor)
-                return Box(object.x, object.y, object.width, object.height, PhysicsProcessor)
+            function(object, Map, arx)
+                return Box(object.x, object.y, object.width, object.height, arx.PhysicsProcessor)
             end 
         },
         player = {   
             registerFunction =
-            function(object, Map, PhysicsProcessor)
-                return Player(object.x, object.y, PhysicsProcessor)
+            function(object, Map, arx)
+                return Player(object.x, object.y, arx.PhysicsProcessor)
             end
         },
         enemy = {
             registerFunction =
-            function(object, Map, PhysicsProcessor)
+            function(object, Map, arx)
                 return Enemy(object.x, object.y)
             end
         }

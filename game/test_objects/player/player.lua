@@ -16,7 +16,6 @@ function Player:update(dt)
 end
 
 function Player:move(direction)
-    print(self.velocity.x)
     self:addVelocity(direction * self.moveSpeed)
 end
 

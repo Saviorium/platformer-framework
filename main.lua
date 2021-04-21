@@ -57,4 +57,7 @@ function love.keypressed(key)
     if StateManager.current().keypressed then
         StateManager.current():keypressed(key)
     end
+    if key == "escape" then
+        StateManager.switch(states.game)
+    end
 end
