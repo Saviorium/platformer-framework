@@ -6,8 +6,6 @@ local Player = Class {
         self.collider = PhysicsProcessor.HC:rectangle(x, y, 35, 25)
         PhysicsProcessor:registerObject(self, x, y, 'player', 'RigidBody')
         self.controller = PlayerController(self, UserInputManager)
-        self.direction = Vector(0,0)
-
         self.jumpSpeed = 3
         self.moveSpeed = 1
     end
@@ -18,6 +16,7 @@ function Player:update(dt)
 end
 
 function Player:move(direction)
+    print(self.velocity.x)
     self:addVelocity(direction * self.moveSpeed)
 end
 

@@ -28,13 +28,12 @@ local DefaultPlatformingCollisionResolver = {
 local DefaultPlatformingMovingProcessor = {
     addAccelerationToObjectAndCalculateFriction = function (object, acceleration)
         -- Блок накидывания скорости объекту
-        if (object.velocity.x + acceleration.x) <= object.maxSpeed then
+        if (object.velocity.x + acceleration.x) <= object.maxVelocity.x and (object.velocity.x + acceleration.x) >= -object.maxVelocity.x then
             object.velocity.x = object.velocity.x + acceleration.x
         else
-            object.velocity.x = object.direction.x * object.maxSpeed
+            object.velocity.x = (object.velocity.x > 0 and 1 or -1) * object.maxVelocity.x
         end
         object.velocity.y = object.velocity.y + acceleration.y
-
         -- Блок снижения скорости (гравитация и трение о поверхность воздух, вся фигня)
         local slowDownDirection = object.velocity.x >= 0 and -1 or 1
         if -slowDownDirection * (object.velocity.x + slowDownDirection * object.slowDownSpeed ) > 0 then
@@ -43,7 +42,7 @@ local DefaultPlatformingMovingProcessor = {
             object.velocity.x = 0
         end
 
-        if not object.isGrounded and object.velocity.y <= object.maxSpeed  then
+        if not object.isGrounded and object.velocity.y <= object.maxVelocity.y  then
             object.velocity = object.velocity + object.gravity
         end
     end
@@ -81,12 +80,12 @@ end
 
 -- typeName - Naming of type and index in table - string
 -- gravity  - Vector of gravity if null - pick standard global gravity
--- maxSpeed - Maximum speed of an object, if 0 then object immovable, if null - take default max speed
+-- maxVelocity - Maximum speed of an object, if 0 then object immovable, if null - take default max speed
 -- isColliding - bool = can be pushed by another object?
-function PhysicsProcessor:registerObjectType(typeName, gravity, maxSpeed, isColliding)
+function PhysicsProcessor:registerObjectType(typeName, gravity, maxVelocity, isColliding)
     local newType = {
         gravity = gravity and gravity or self.globalGravity,
-        maxSpeed = maxSpeed and maxSpeed or 10,
+        maxVelocity = maxVelocity and maxVelocity or Vector(10, 10),
         isColliding = isColliding and isColliding or true,
     }
     self:addType(typeName, newType)
@@ -146,7 +145,7 @@ function PhysicsProcessor:registerObject(object, x, y, layer, type)
     PhysicsObject.init(
         object, x, y,
         self.objectsTypes[type].gravity,
-        self.objectsTypes[type].maxSpeed,
+        self.objectsTypes[type].maxVelocity,
         self.objectsTypes[type].isColliding,
         self
     )

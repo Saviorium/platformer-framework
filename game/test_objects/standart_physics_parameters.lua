@@ -14,12 +14,12 @@ local standartPhysicsProcessorParams = {
     objectsTypes = {
         SolidBody = {
             gravity = Vector(0, 0),
-            maxSpeed = 0,
+            maxVelocity = Vector(0, 0),
             isColliding = false,
         },
         RigidBody = {
             gravity = Vector(0, 0.05),
-            maxSpeed = 10,
+            maxVelocity = Vector(3, 10),
             isColliding = true,
         }
     }
