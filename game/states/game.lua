@@ -1,10 +1,9 @@
-local Player = require "game.test_objects.player.player"
-local Box = require "game.test_objects.box"
 local Bullet = require "game.bullet"
 local AnimatedDummy = require "game.animated_dummy"
 local HC = require "lib.hardoncollider"
 
-local Enemy = require "game.test_objects.enemy.enemy"
+local mapParams = require "game.map_params"
+local Map = require "engine.map"
 
 local game = {}
 
@@ -32,14 +31,7 @@ function game:enter()
     self.bullets = {}
 
     self.PhysicsProcessor = standartPhysicsProcessor
-    self.objects = {}
-    local start_x, start_y = 100, 100
-    local step = 50
-    table.insert(self.objects, Box(start_x, start_y, 100, 10, self.PhysicsProcessor))
-    table.insert(self.objects, Box(start_x+step, start_y+step, 100, 10, self.PhysicsProcessor))
-    table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
-    table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
-    table.insert(self.objects, Enemy(start_x+5*step, start_y+1.5*step))
+    self.map = Map(mapParams, 'test_level1', {PhysicsProcessor = self.PhysicsProcessor})
 end
 
 function game:mousepressed(x, y)
@@ -65,19 +57,23 @@ function game:keypressed(key)
         SoundManager:play("smallExplosion")
     end
     if key == "c" then
-        self.objects[5]:takeControl(UserInputManager)
+        self.map:getObject("test_enemy_1"):takeControl(UserInputManager)
+    end
+    if key == "1" and key == "2" or key == "3" or key == "4" then
+        self.map:init('test_level'..key, self.PhysicsProcessor)
     end
 end
 
 function game:draw()
     love.graphics.draw(self.bg)
+    self.map:draw()
     self.sprite:draw(10, 10)
     self.animatedDummy:draw()
 
     for _, bullet in ipairs(self.bullets) do
         bullet:draw()
     end
-    for _, object in ipairs(self.objects) do
+    for _, object in ipairs(self.PhysicsProcessor.objects) do
         object:draw()
     end
 
@@ -87,6 +83,7 @@ function game:draw()
         shape:draw()
     end
     love.graphics.setColor(1, 1, 1)
+    
 end
 
 function game:update(dt)
@@ -97,12 +94,10 @@ function game:update(dt)
         bullet:update(dt)
     end
     self.animatedDummy:update(dt)
-    for _, object in ipairs(self.objects) do
-        object:update(dt)
-    end
     self.PhysicsProcessor:update(dt)
     love.graphics.setColor({1,1,1})
     self.sprite:update(dt)
+    self.map:update(dt)
 end
 
 return game

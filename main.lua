@@ -1,12 +1,13 @@
 require "settings"
 require "engine.utils"
-Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
+Class = require "lib.hump.class"
 
 Debug = require "engine.debug"
 serpent = require "lib.debug.serpent"
 
 StateManager = require "lib.hump.gamestate"
+
 AssetManager = require "engine.asset_manager"
 
 local MusicData = require "game.music_data"
@@ -15,7 +16,7 @@ MusicPlayer = require "engine.music_player" (MusicData)
 local SoundData = require "game.sound_data"
 SoundManager = require "engine.sound_manager" (SoundData)
 
--- StandartMovingProcessor = require "engine.physics.moving_processor"
+-- StandardMovingProcessor = require "engine.physics.moving_processor"
 standartPhysicsProcessorParams = require "game.test_objects.standart_physics_parameters"
 standartPhysicsProcessor = require "engine.physics_processor" (standartPhysicsProcessorParams)
 
@@ -55,5 +56,8 @@ end
 function love.keypressed(key)
     if StateManager.current().keypressed then
         StateManager.current():keypressed(key)
+    end
+    if key == "escape" then
+        StateManager.switch(states.game)
     end
 end

@@ -25,4 +25,4 @@ local standartPhysicsProcessorParams = {
     }
 }
 
-return standartPhysicsProcessorParams
+return standartPhysicsProcessorParams 
