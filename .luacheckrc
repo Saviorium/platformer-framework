@@ -2,12 +2,10 @@ ignore = {
    "212",  -- unused argument 'self'
 }
 
-globals = {
-  -- lua
-  "unpack",
+std = 'luajit+love'
 
+globals = {
   -- love and libs
-  "love",
   "Class",
   "Vector",
   "serpent", -- todo: include by demand only
