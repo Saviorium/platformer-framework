@@ -3,6 +3,8 @@ local Box = require "game.test_objects.box"
 local Bullet = require "game.test_objects.bullet"
 local AnimatedDummy = require "game.test_objects.animated_dummy.animated_dummy"
 
+local NineSliceSprite = require "engine.ui.nine_slice_sprite"
+
 local HC = require "lib.hardoncollider"
 
 local Enemy = require "game.test_objects.enemy.enemy"
@@ -42,6 +44,13 @@ function game:enter()
     table.insert(self.objects, Box(start_x+2*step, start_y+2*step, 100, 10, self.PhysicsProcessor))
     table.insert(self.objects, Player(start_x+2*step, start_y+1.5*step, self.PhysicsProcessor))
     table.insert(self.objects, Enemy(start_x+5*step, start_y+1.5*step))
+
+    local nineSliceImage = AssetManager:getImage("9-slice")
+    self.nineSprite = NineSliceSprite(nineSliceImage, Vector(8, 8)):setSize(100, 100)
+    self.nineSpriteSize = 100
+    self.nineSpriteDt = 3
+
+    self.buttonSprite = NineSliceSprite(AssetManager:getImage("button"), 3):setSize(50, 20)
 end
 
 function game:mousepressed(x, y)
@@ -73,6 +82,8 @@ end
 
 function game:draw()
     love.graphics.draw(self.bg)
+    self.nineSprite:draw(130, 250)
+    self.buttonSprite:draw()
     self.sprite:draw(10, 10)
     self.animatedDummy:draw()
 
@@ -103,8 +114,15 @@ function game:update(dt)
         object:update(dt)
     end
     self.PhysicsProcessor:update(dt)
+
     love.graphics.setColor({1,1,1})
     self.sprite:update(dt)
+
+    if self.nineSpriteSize > 300 or self.nineSpriteSize < 50 then
+        self.nineSpriteDt = -self.nineSpriteDt
+    end
+    self.nineSpriteSize = self.nineSpriteSize + self.nineSpriteDt
+    self.nineSprite:setSize(self.nineSpriteSize, self.nineSpriteSize)
 end
 
 return game
